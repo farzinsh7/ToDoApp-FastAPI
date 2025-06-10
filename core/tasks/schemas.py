@@ -8,7 +8,7 @@ class TodoBaseSchema(BaseModel):
     description: Optional[str] = Field(
         None, max_length=500, description="Description of the todo"
     )
-    is_completed: bool = Field(..., description="States of the todo")   
+    is_completed: bool = Field(defauld=False, description="States of the todo")   
     priority: int = Field(..., description="Priority of the todo")
 
 
