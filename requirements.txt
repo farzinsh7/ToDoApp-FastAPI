@@ -4,6 +4,8 @@ psycopg[binary]
 python-dotenv
 
 # third party modules
+sqlalchemy
+alembic
 
 
 
