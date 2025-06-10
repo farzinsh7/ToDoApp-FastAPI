@@ -1,0 +1,36 @@
+services:
+  db:
+    container_name: db
+    image: postgres:15-alpine
+    volumes:
+      - ./postgres/data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    expose:
+      - 5432
+    restart: always
+
+  backend:
+    container_name: backend
+
+    build:
+      context: .
+      dockerfile: ./dockerfiles/dev/fastapi/Dockerfile
+
+    volumes:
+      - ./core:/usr/src/app
+    working_dir: /usr/src/app
+
+    command: uvicorn main:app --reload
+
+    # ports:
+    #   - 8000:8000
+
+    environment:
+
+    restart: always
+
+    depends_on:
+      - db
