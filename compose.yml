@@ -1,15 +1,17 @@
 services:
   db:
     container_name: db
-    image: postgres:15-alpine
+    image: postgres:17-alpine
+
     volumes:
       - ./postgres/data:/var/lib/postgresql/data
-    environment:
-      - POSTGRES_DB=postgres
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
+
+    env_file:
+      - ./envs/dev/fastapi/.env
+
     expose:
       - 5432
+
     restart: always
 
   backend:
@@ -21,14 +23,16 @@ services:
 
     volumes:
       - ./core:/usr/src/app
+
     working_dir: /usr/src/app
 
-    command: uvicorn main:app --reload
+    command: uvicorn main:app --reload --host 0.0.0.0
 
-    # ports:
-    #   - 8000:8000
+    ports:
+      - 8000:8000
 
-    environment:
+    env_file:
+      - ./envs/dev/fastapi/.env
 
     restart: always
 

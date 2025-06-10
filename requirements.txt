@@ -1,0 +1,22 @@
+# general  modules
+fastapi[standard] >0.114.12,<0.115.12
+psycopg[binary]
+python-dotenv
+
+# third party modules
+
+
+
+# deployment module
+
+
+
+# email third party modules
+
+
+
+# refactoring and tests
+
+
+
+# background process and cache
